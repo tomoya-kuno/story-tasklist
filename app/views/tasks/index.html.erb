@@ -14,15 +14,7 @@
       <!--ボタンを押すとtask新規作成画面に移行する-->
     </aside>
     <div class="col-sm-7">
-      <ul class="nav nav-tabs nav-justified mb-3">
-        <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
-        <li class="nav-item">All</li>
-        <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-        <!--今日-->
-        <li class="nav-item">Today</li>
-        <!--明日-->
-        <li class="nav-item">Tomorrow</li>
-      </ul>
+      <%= render 'tasks/tasks_navbar' %>
       <%= render 'tasks/tasks', tasks: @tasks%>
     </div>
   </div>
@@ -32,6 +24,7 @@
       <h1>Welcome to the Story-Tasklist</h1>
       <p>~ A service dedicated to those who love all stories ~</p>
       <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+      <%= link_to 'Login!', login_path, class: 'btn btn-lg btn-primary' %>
     </div>
   </div>
 <% end %>

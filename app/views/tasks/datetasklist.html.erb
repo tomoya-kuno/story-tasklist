@@ -12,15 +12,7 @@
     <!--ボタンを押すとtask新規作成画面に移行する-->
   </aside>
   <div class="col-sm-8">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
-      <li class="nav-item">All</li>
-      <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-      <!--今日-->
-      <li class="nav-item">Today</li>
-      <!--明日-->
-      <li class="nav-item">Tomorrow</li>
-    </ul>
+    <%= render 'tasks/tasks_navbar' %>
     <%= render 'tasks/tasks', {tasks: @tasks,date_time: @date_time%>
   </div>
 </div>

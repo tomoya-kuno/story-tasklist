@@ -1,41 +1,46 @@
 class TasksController < ApplicationController
+  before_action :require_user_logged_in ,except:[:index]
+  before_action :correct_user, only: [:destroy]
   def index
-    @tasks = Task.order('start_date').page(params[:page])
-    @status = ['not done','done']
+    if logged_in?
+      @tasks = current_user.tasks.order('start_date').page(params[:page])
+    end
   end
 
   def show
-    @task = Task.find(params[:id])
-    @tasks = Task.order('start_date').page(params[:page])
+    @task = current_user.tasks.find(params[:id])
+    @tasks = current_user.tasks.order('start_date').page(params[:page])
   end
 
   def new
-    @task = Task.new
-    @tasks = Task.order('start_date').page(params[:page])
+    @task = current_user.tasks.build
+    @tasks = current_user.tasks.order('start_date').page(params[:page])
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'Task が正常に設定されました'
       redirect_to root_url
     else
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Task が設定されませんでした'
       render :new
     end
   end
 
   def edit
-    @task = Task.find(params[:id])
-    @tasks = Task.order('start_date').page(params[:page])
+    @task = current_user.tasks.find(params[:id])
+    @tasks = current_user.tasks.order('start_date').page(params[:page])
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
-      redirect_to @task
+      redirect_to root_url
     else
+      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Task は更新されませんでした'
       render :edit
     end
@@ -45,7 +50,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.destroy
     flash[:success] = 'Taskは正常に削除されました'
-    redirect_to @task
+    redirect_to root_url
   end
 
   private
@@ -53,5 +58,11 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title,:content,:status,:start_date,:end_date)
     #必要なパラメータを把握し、送信データを精査する
+  end
+  def correct_user
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      redirect_to root_url
+    end
   end
 end

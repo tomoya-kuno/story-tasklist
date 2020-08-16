@@ -2,20 +2,7 @@
   <aside class="col-sm-5">
     <div class="card">
       <div class="card-body">
-        <!--ユーザーの目標を記入する欄-->
-        <%= form_with(model: @task, local: true) do |f| %>
-          <div class="form-group">
-            <p>件名(12文字以下)</p>
-            <%= f.text_field :title %>
-            <p>内容&関連情報</p>
-            <%= f.text_area :content, rows: 5 %>
-            <p>開始日時</p>
-            <%= f.datetime_select :start_date %>
-            <p>終了日時</p>
-            <%= f.datetime_select :end_date %>
-          </div>
-          <%= f.submit 'Create', class: 'btn btn-primary btn-block'%>
-        <% end %>
+        <%= render 'form', task: @task %>
       </div>
     </div>
   </aside>
