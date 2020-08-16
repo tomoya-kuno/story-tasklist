@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   # # 編集用のフォームページ(edit)
   # get 'tasks/:id/edit', to: 'tasks#edit'
   
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
   get 'signup', to: 'users#new'
   resources :users, only: [:new, :create]
 end
