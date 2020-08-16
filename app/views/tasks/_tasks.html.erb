@@ -1,0 +1,15 @@
+<table>
+  <% tasks.each do |task| %>
+  <tr>
+    <td><%= task.status %></td>
+    <td>
+      <%= task.start_date.strftime("%Y-%m-%d %H:%M") %>~
+      <br>
+      <%= task.end_date.strftime("%Y-%m-%d %H:%M") %>
+    </td>
+    <td><%=link_to task.title, task %></td>
+    <td><%= link_to 'edit', edit_task_path(task.id) ,class: 'btn btn-success btn-sm'%></td>
+    <td><%= link_to 'delete', task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%></td>
+  </tr>
+  <% end %>
+</table>

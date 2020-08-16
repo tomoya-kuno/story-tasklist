@@ -1,0 +1,27 @@
+<div class="row">
+  <aside class="col-sm-5">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Tasklist</h4>
+      </div>
+      <div class="card-body">
+        <!--ユーザーの目標を記入する欄-->
+      </div>
+    </div>
+    <%= link_to '新規タスクの追加', new_task_path %>
+    <!-- render '../..', ..: @.. -->
+    <!--ボタンを押すとtask新規作成画面に移行する-->
+  </aside>
+  <div class="col-sm-7">
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
+      <li class="nav-item">All</li>
+      <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
+      <!--今日-->
+      <li class="nav-item">Today</li>
+      <!--明日-->
+      <li class="nav-item">Tomorrow</li>
+    </ul>
+    <%= render 'tasks/tasks', tasks: @tasks%>
+  </div>
+</div>

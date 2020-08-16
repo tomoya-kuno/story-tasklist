@@ -29,5 +29,8 @@ module StoryTasklist
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+        
+    #time_zoneを東京に設定
+    config.time_zone = 'Tokyo'
   end
 end

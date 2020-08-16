@@ -1,0 +1,35 @@
+<div class="row">
+  <aside class="col-sm-5">
+    <div class="card">
+      <div class="card-body">
+        <!--ユーザーの目標を記入する欄-->
+        <%= form_with(model: @task, local: true) do |f| %>
+          <div class="form-group">
+            <p>件名(12文字以下)</p>
+            <%= f.text_field :title %>
+            <p>内容&関連情報</p>
+            <%= f.text_area :content, rows: 5 %>
+            <p>開始日時</p>
+            <%= f.datetime_select :start_date %>
+            <p>終了日時</p>
+            <%= f.datetime_select :end_date %>
+          </div>
+          <%= f.submit 'Edit', class: 'btn btn-primary btn-block'%>
+        <% end %>
+        <% @task.status = 'no done' %>
+      </div>
+    </div>
+  </aside>
+  <div class="col-sm-7">
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
+      <li class="nav-item">All</li>
+      <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
+      <!--今日-->
+      <li class="nav-item">Today</li>
+      <!--明日-->
+      <li class="nav-item">Tomorrow</li>
+    </ul>
+    <%= render 'tasks/tasks', tasks: @tasks%>
+  </div>
+</div>
