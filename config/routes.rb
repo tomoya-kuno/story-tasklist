@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   # get 'tasks/new', to: 'tasks#new'
   # # 編集用のフォームページ(edit)
   # get 'tasks/:id/edit', to: 'tasks#edit'
+  
+  get 'signup', to: 'users#new'
+  resources :users, only: [:new, :create]
 end
