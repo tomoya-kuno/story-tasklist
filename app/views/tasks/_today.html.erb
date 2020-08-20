@@ -5,7 +5,7 @@
     <h4><%= task.start_date.strftime("%Y-%m-%d (%A)") %></h4>
   <% end %>
   <% if task.status != 'custom' %>
-    <div class="card" style="margin: 25px ; padding: 15px">
+    <div class="card" style="margin: 25px ;padding: 15px">
       <table>
         <tr>
           <td>
@@ -13,12 +13,7 @@
           </td>
           <td><%=link_to task.title, task %></td>
           <td>
-            <!--タスク達成・未達成ボタン-->
-            <% if task.status == 'done' %>
-              <%= button_to 'Done', task_path(task), method: :put, params: { status: 'not_done' } %>
-            <% else %>
-              <%= button_to 'Not Done', task_path(task), method: :put, params: { status: 'done' } %>
-            <% end %>
+             <!--タスク達成・未達成ボタン-->
           </td>
           <td>
             <%= link_to 'edit', edit_task_path(task.id) ,class: 'btn btn-success btn-sm'%>
@@ -33,4 +28,3 @@
     <% previous_day = task.start_date.day %>
   <% end %>
 <% end %>
-  

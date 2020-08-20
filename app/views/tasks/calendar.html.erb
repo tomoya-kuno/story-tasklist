@@ -1,0 +1,17 @@
+<div class="text-center">
+  <h1>Calendar</h1>
+  <font size='2' color='#999999'>月ごとの日程</font>
+</div>
+
+<%= month_calendar events: @tasks do |date, tasks| %>
+  <%= date.day %>
+  <% tasks.each do |task| %>
+    <div>
+      <font size="2" color="#444444"><%= task.start_date.strftime("%H:%M") %><br><%= link_to task.title, task %></font>
+    </div>
+  <% end %>
+<% end %>
+
+
+
+

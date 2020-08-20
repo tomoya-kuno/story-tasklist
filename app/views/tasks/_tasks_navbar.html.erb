@@ -1,9 +1,26 @@
+<!--ナビバー-->
 <ul class="nav nav-tabs nav-justified mb-3">
-<!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
-  <li class="nav-item"><a href="/" class="nav-link">All Tasks</a></li>
+<!--All……下記のナビバーをクリックすることにより、全てのタスクを表示する-->
+  <li class="nav-item"><a href="#all_tasks" class="nav-link active" data-toggle="tab">All Tasks</a></li>
   <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
   <!--今日-->
-  <li class="nav-item">Today</li>
+  <li class="nav-item"><a href="#today" class="nav-link" data-toggle="tab">Today</a></li>
   <!--明日-->
-  <li class="nav-item">Tomorrow</li>
+  <li class="nav-item"><a href="#tomorrow" class="nav-link" data-toggle="tab">Tomorrow</a></li>
 </ul>
+
+<!--内容-->
+<div class="tab-content">
+  <!--All Tasks-->
+  <div id="all_tasks" class="tab-pane active">
+    <%= render 'tasks/tasks', tasks: @tasks%>
+  </div>
+  <!--All Tasks-->
+  <div id="today" class="tab-pane">
+    <%= render 'tasks/today', tasks: @tasks%>
+  </div>
+  <!--All Tasks-->
+  <div id="tomorrow" class="tab-pane">
+    <%= render 'tasks/tomorrow', tasks: @tasks%>
+  </div>
+</div>

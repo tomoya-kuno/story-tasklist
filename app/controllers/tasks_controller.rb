@@ -4,6 +4,8 @@ class TasksController < ApplicationController
   def index
     if logged_in?
       @tasks = current_user.tasks.order('start_date').page(params[:page])
+      @now = Time.zone.now
+      # 時間を表示する変数の追加
     end
   end
 
@@ -11,7 +13,17 @@ class TasksController < ApplicationController
     @task = current_user.tasks.find(params[:id])
     @tasks = current_user.tasks.order('start_date').page(params[:page])
   end
-
+  
+  def calendar
+    # カレンダー表示
+    @tasks = current_user.tasks.order('start_date').page(params[:page])
+  end
+  
+  def custom
+    @task = current_user.tasks.build(status: 'custom')
+    @tasks = current_user.tasks.order('start_date').page(params[:page])
+  end
+  
   def new
     @task = current_user.tasks.build
     @tasks = current_user.tasks.order('start_date').page(params[:page])
@@ -56,8 +68,12 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title,:content,:status,:start_date,:end_date)
+    params.permit(:title,:status,:content,:start_date,:end_date)
     #必要なパラメータを把握し、送信データを精査する
+    # 本来ならparams.require(:task).permit(:title,:content,:start_date,:end_date)まで書く予定だったが、
+    # doneやnot doneなどのボタンが上手く作動せず、require(:task)を抜くことで上手く作動したので、require(:task)を抜いた。
+    # require(:task)は、Taskモデルのフォームから得られるデータに関するものであると明示するものであるため、
+    # doneやnot doneなどのボタンが上手く作動しない。
   end
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])

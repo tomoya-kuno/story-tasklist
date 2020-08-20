@@ -1,15 +1,18 @@
 <div class="row">
-  <aside class="col-sm-4">
+  <aside class="col-sm-5">
     <div class="card">
       <div class="card-header">
-        <h5 class="card-title"><% @task.title %></h5>
+        <h4 class="card-title"><%= @task.title %></h4>
       </div>
       <div class="card-body">
-        内容＆関連情報
+        <font size='2' color='#999999'>内容＆関連情報</font>
         <br>
-        <% @task.content %>
+        <font size='1' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
         <br>
-        タスク実行日時
+        <%= @task.content %>
+        <br>
+        <br>
+        <font size='2' color='#999999'>タスク実行日時</font>
         <br>
         <%= @task.start_date.strftime("%Y-%m-%d %H:%M") %>~
         <br>
@@ -20,20 +23,21 @@
             <td><%= link_to 'delete', @task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%></td>
           </tr>
         </table>
-        <!--タスクの詳細を表示する-->
       </div>
     </div>
   </aside>
-  <div class="col-sm-8">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
-      <li class="nav-item">All</li>
-      <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-      <!--今日-->
-      <li class="nav-item">Today</li>
-      <!--明日-->
-      <li class="nav-item">Tomorrow</li>
-    </ul>
-    <%= render 'tasks/tasks', tasks: @tasks%>
+  <div class="col-sm-7">
+    <%= week_calendar events: @tasks do |date, tasks| %>
+      <%= date.day %>
+      <% tasks.each do |task| %>
+        <div>
+          <font size="2" color="#444444">
+            <%= task.start_date.strftime("%H:%M") %>
+            <br>~<%= task.end_date.strftime("%H:%M") %>
+            <br><%= link_to task.title, task %>
+          </font>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

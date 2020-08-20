@@ -1,14 +1,21 @@
 <%= form_with(model: @task, local: true) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
-  <div class="form-group">
-  <p>件名(12文字以下)</p>
-  <%= f.text_field :title %>
-  <p>内容&関連情報</p>
-  <%= f.text_area :content, rows: 5 %>
-  <p>開始日時</p>
-  <%= f.datetime_select :start_date %>
-  <p>終了日時</p>
-  <%= f.datetime_select :end_date %>
-  </div>
-  <%= f.submit 'Add Task', class: 'btn btn-primary btn-block'%>
+    <div class="form-group">
+      <%= f.label :title, '件名(12文字以下)' %>
+      <%= f.text_field :title ,class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, '内容&関連情報' %>
+      <%= f.text_area :content, rows: 5 ,class: 'form-control' %>
+      <font size='1' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
+    </div>
+    <div class="form-group">
+      <%= f.label :title, '開始日時' %>
+      <%= f.datetime_select :start_date ,class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, '終了日時' %>
+      <%= f.datetime_select :end_date ,class: 'form-control' %>
+    </div>
+    <%= f.submit 'Add', class: 'btn btn-primary btn-block'%>
 <% end %>

@@ -56,3 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #ページネーション
 gem 'kaminari'
+
+# カレンダー
+gem 'simple_calendar', '~> 2.0'

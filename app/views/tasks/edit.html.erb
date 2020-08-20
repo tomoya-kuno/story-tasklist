@@ -7,15 +7,17 @@
     </div>
   </aside>
   <div class="col-sm-7">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <!--All……下記のナビばーをクリックすることにより、全てのタスクを表示する-->
-      <li class="nav-item">All</li>
-      <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-      <!--今日-->
-      <li class="nav-item">Today</li>
-      <!--明日-->
-      <li class="nav-item">Tomorrow</li>
-    </ul>
-    <%= render 'tasks/tasks', tasks: @tasks%>
+    <%= week_calendar events: @tasks do |date, tasks| %>
+      <%= date.day %>
+      <% tasks.each do |task| %>
+        <div>
+          <font size="2" color="#444444">
+            <%= task.start_date.strftime("%H:%M") %>
+            <br>~<%= task.end_date.strftime("%H:%M") %>
+            <br><%= link_to task.title, task %>
+          </font>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
