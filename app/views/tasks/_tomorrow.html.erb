@@ -1,10 +1,19 @@
-<% previous_month = nil %>
-<% previous_day = nil %>
+<% previous_datetime = now.beginning_of_day %>
+<!--00:00に合わせる-->
+<% previous_datetime = previous_datetime + 1.days %>
+<% tomorrow_month = previous_datetime.month %>
+<% tomorrow_day = previous_datetime.day %>
+<h4><%= previous_datetime.strftime("%Y-%m-%d (%A)") %></h4>
 <% tasks.each do |task| %>
-  <% if (task.start_date.day != previous_day)||(task.start_date.month != previous_month) %>
-    <h4><%= task.start_date.strftime("%Y-%m-%d (%A)") %></h4>
-  <% end %>
-  <% if task.status != 'custom' %>
+  <% if (task.start_date.day == tomorrow_day)&&(task.start_date.month == tomorrow_month) %>
+    <% if previous_datetime != task.start_date %>
+      <% free_time = ( ( task.start_date - previous_datetime ) / 60 ).round # 四捨五入 %>
+      <% free_time_hour = ( free_time / 60 ).floor # 切り捨て %>
+      <% free_time_minute = free_time % 60 %>
+      <div class="card" style="margin: 25px ;padding: 15px">
+        <p>空き時間　　　<%= free_time_hour %>時間<%= free_time_minute %>分</p>
+      </div>
+    <% end %>
     <div class="card" style="margin: 25px ;padding: 15px">
       <table>
         <tr>
@@ -24,7 +33,6 @@
         </tr>
       </table>
     </div>
-    <% previous_month = task.start_date.month %>
-    <% previous_day = task.start_date.day %>
+    <% previous_datetime = task.end_date %>
   <% end %>
 <% end %>

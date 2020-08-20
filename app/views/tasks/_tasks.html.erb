@@ -13,18 +13,27 @@
           </td>
           <td><%=link_to task.title, task %></td>
           <td>
-            <!--タスク達成・未達成ボタン-->
-            <% if task.status == 'done' %>
-              <%= button_to 'Done', task_path(task), method: :put, params: { status: 'not_done' } %>
-            <% else %>
-              <%= button_to 'Not Done', task_path(task), method: :put, params: { status: 'done' } %>
-            <% end %>
-          </td>
-          <td>
             <%= link_to 'edit', edit_task_path(task.id) ,class: 'btn btn-success btn-sm'%>
           </td>
           <td>
-            <%= link_to 'delete', task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
+            <%= link_to 'delete', task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm' %>
+          </td>
+          <td>
+            <% if task.status == 'done' %>
+              <%= form_with(model: task, local: true) do |f| %>
+                <%= f.radio_button :status, :not_done , checked: true %>
+                <font size='1' color='#999999'><%= f.label :status, "↓ turn 'not_done'", {value: :not_done, style: "display: inline-block;"} %></font>
+                <br>
+                <%= f.submit 'done', class: 'btn btn-success btn-sm'%>
+              <% end %>
+            <% else %>
+              <%= form_with(model: task, local: true) do |f| %>
+                <%= f.radio_button :status, :done , checked: true %>
+                <font size='1' color='#999999'><%= f.label :status, "↓ turn 'done'!", {value: :done, style: "display: inline-block;"} %></font>
+                <br>
+                <%= f.submit 'not_done', class: 'btn btn-danger btn-sm'%>
+              <% end %>
+            <% end %>
           </td>
         </tr>
       </table>

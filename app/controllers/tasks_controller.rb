@@ -68,8 +68,8 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:title,:status,:content,:start_date,:end_date)
-    #必要なパラメータを把握し、送信データを精査する
+    params.require(:task).permit(:title,:status,:content,:start_date,:end_date)
+    # 必要なパラメータを把握し、送信データを精査する
     # 本来ならparams.require(:task).permit(:title,:content,:start_date,:end_date)まで書く予定だったが、
     # doneやnot doneなどのボタンが上手く作動せず、require(:task)を抜くことで上手く作動したので、require(:task)を抜いた。
     # require(:task)は、Taskモデルのフォームから得られるデータに関するものであると明示するものであるため、

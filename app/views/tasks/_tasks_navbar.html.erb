@@ -17,10 +17,10 @@
   </div>
   <!--All Tasks-->
   <div id="today" class="tab-pane">
-    <%= render 'tasks/today', tasks: @tasks%>
+    <%= render 'tasks/today', { tasks: @tasks , now: @now }%>
   </div>
   <!--All Tasks-->
   <div id="tomorrow" class="tab-pane">
-    <%= render 'tasks/tomorrow', tasks: @tasks%>
+    <%= render 'tasks/tomorrow', { tasks: @tasks , now: @now }%>
   </div>
 </div>
