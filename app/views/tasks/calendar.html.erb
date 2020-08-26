@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center" style="margin:25px 0px 25px 0px">
   <h1>Calendar</h1>
   <font size='2' color='#999999'>月ごとの日程</font>
 </div>
@@ -6,9 +6,11 @@
 <%= month_calendar events: @tasks do |date, tasks| %>
   <%= date.day %>
   <% tasks.each do |task| %>
-    <div>
-      <font size="2" color="#444444"><%= task.start_date.strftime("%H:%M") %><br><%= link_to task.title, task %></font>
-    </div>
+    <% if task.status != 'custom' %>
+      <div>
+        <font size='2'><%= link_to task.title, task %></font>
+      </div>
+    <% end %>
   <% end %>
 <% end %>
 

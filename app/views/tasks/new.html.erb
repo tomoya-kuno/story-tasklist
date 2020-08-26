@@ -1,23 +1,12 @@
 <div class="row">
-  <aside class="col-sm-5">
+  <aside class="col-md-5">
     <div class="card">
       <div class="card-body">
         <%= render 'form', task: @task %>
       </div>
     </div>
   </aside>
-  <div class="col-sm-7">
-    <%= week_calendar events: @tasks do |date, tasks| %>
-      <%= date.day %>
-      <% tasks.each do |task| %>
-        <div>
-          <font size="2" color="#444444">
-            <%= task.start_date.strftime("%H:%M") %>
-            <br>~<%= task.end_date.strftime("%H:%M") %>
-            <br><%= link_to task.title, task %>
-          </font>
-        </div>
-      <% end %>
-    <% end %>
+  <div class="col-md-7">
+    <%= render 'tasks/tasks_navbar' %>
   </div>
 </div>

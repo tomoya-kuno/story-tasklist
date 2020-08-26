@@ -1,0 +1,71 @@
+<div class="simple-calendar">
+  <table class="table table-striped">
+    <!--table-striped 1行ごとに色付け-->
+    <thead>
+      <tr>
+        <% ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].each do |week_day_name| %>
+          <th>
+            <%= week_day_name %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% (1..7).each do |week_day_calendar| %>
+          <th>
+            <% week_day_today = week_day_calendar %>
+            
+            
+            
+            
+            <% [tasks_first , tasks_second].each do |tasks| %>
+            
+            
+            
+            
+            <% tasks.each do |task| %>
+              <% if task.status == 'custom' %>
+                <% task.week_day_index.chars.each do |i| %>
+                  <% if i == '月' %>
+                    <% week_day = 1 %>
+                  <% elsif i == '火' %>
+                    <% week_day = 2 %>
+                  <% elsif i == '水' %>
+                    <% week_day = 3 %>
+                  <% elsif i == '木' %>
+                    <% week_day = 4 %>
+                  <% elsif i == '金' %>
+                    <% week_day = 5 %>
+                  <% elsif i == '土' %>
+                    <% week_day = 6 %>
+                  <% elsif i == '日' %>
+                    <% week_day = 7 %>
+                  <% else %>
+                    <!--『/』の処理：適当な数値で補填する-->
+                    <% week_day = 10 %>
+                  <% end %>
+                  
+                  <% if week_day_today == week_day %>
+                    <div>
+                      <font size="2" color="#444444"><br><%= task.start_at.strftime("%H:%M") %>~<br><%= task.end_at.strftime("%H:%M") %><br><%= link_to task.title, task %></font>
+                    </div>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+            
+            
+            
+            <% end %>
+            
+            
+            
+            
+          </th>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -10,17 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_165044) do
+ActiveRecord::Schema.define(version: 2020_08_23_200012) do
+
+  create_table "stories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "status"
+    t.string "card_color"
+    t.string "favorite_score"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_stories_on_user_id"
+  end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "content"
     t.string "status"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date "start_on"
+    t.time "start_at"
+    t.date "end_on"
+    t.time "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.string "week_day_index"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -28,9 +43,11 @@ ActiveRecord::Schema.define(version: 2020_08_16_165044) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.string "target"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "stories", "users"
   add_foreign_key "tasks", "users"
 end

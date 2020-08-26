@@ -1,0 +1,8 @@
+<% stories.each do |story| %>
+
+  <% if story.status == 'unread' %>
+  
+    <%= render 'stories/story_card', story: story %>
+  
+  <% end %>
+<% end %>

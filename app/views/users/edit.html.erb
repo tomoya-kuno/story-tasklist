@@ -1,0 +1,54 @@
+<div class="text-center" style="margin:25px 0px 45px 0px">
+  <h1>User Setting</h1>
+</div>
+
+<ul class="nav nav-tabs nav-justified mb-3">
+  <li class="nav-item"><a href="#target" class="nav-link active" data-toggle="tab">Target</a></li>
+  <li class="nav-item"><a href="#nikname" class="nav-link" data-toggle="tab">Nickname</a></li>
+  <li class="nav-item"><a href="#email" class="nav-link" data-toggle="tab">Email</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="target" class="tab-pane active">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+        <%= form_with(model: @user, local: true) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <div class="form-group">
+            <%= f.label :target, 'Target 目標' %>
+            <%= f.text_field :target, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Edit', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="nikname" class="tab-pane">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+        <%= form_with(model: @user, local: true) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <div class="form-group">
+            <%= f.label :name, 'Name 名前' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Edit', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="email" class="tab-pane">
+    <div class="row">
+      <div class="col-sm-6 offset-sm-3">
+        <%= form_with(model: @user, local: true) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <div class="form-group">
+            <%= f.label :email, 'Mail メールアドレス' %>
+            <%= f.email_field :email, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Edit', class: 'btn btn-primary btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

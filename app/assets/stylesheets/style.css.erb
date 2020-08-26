@@ -1,0 +1,63 @@
+/*画面の中央に配置*/
+.wrapper
+{
+    margin: 0 auto;
+    padding: 0 4%;
+    /*狭い画面幅でも左右に余白を残す*/
+}
+
+
+
+/*toppage専用*/
+
+/*画面中央に余白*/
+.home-content
+{
+    text-align: center;
+    margin-top: 10%;
+}
+.home-content p
+{
+    font-size: 1.125rem;
+    margin: 10px 0 42px;
+}
+/*タイトル*/
+.page-title
+{
+    font-size: 4rem;
+    font-family: 'Philosopher', serif;
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+/*ボタン*/
+.button
+{
+    font-size: 1.375rem;
+    backgroud: #0bd;
+    color:fff;
+    border-radius:5px;
+    padding: 18px 32px;
+}
+/*カーソルをボタンに重ねた時に変色*/
+.button:hover
+{
+    background: #0090aa;
+}
+
+/*背景画像*/
+.big-bg
+{
+    backgroud-size: cover;
+    backgroud-position: center top;
+    background-repeat: no-repeat;
+}
+#home
+{
+    background-image: url(<%= asset_path('image_toppage.jpg') %>);
+    min-height: 100vh;
+}
+#home .page-title
+{
+    text-transform:none;
+}

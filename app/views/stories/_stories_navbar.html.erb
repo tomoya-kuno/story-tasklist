@@ -1,0 +1,22 @@
+<!--ナビバー-->
+<ul class="nav nav-tabs nav-justified mb-3">
+<!--All……下記のナビバーをクリックすることにより、全てのストーリーを表示する-->
+  <li class="nav-item"><a href="#all_stories" class="nav-link active" data-toggle="tab">All Stories</a></li>
+  <!--今日-->
+  <li class="nav-item"><a href="#unread_stories" class="nav-link" data-toggle="tab">Unread Stories</a></li>
+  <!--明日-->
+  <li class="nav-item"><a href="#favorite_stories" class="nav-link" data-toggle="tab">Favorite Stories</a></li>
+</ul>
+
+<!--内容-->
+<div class="tab-content">
+  <div id="all_stories" class="tab-pane active">
+    <%= render 'stories/stories', stories: @stories %>
+  </div>
+  <div id="unread_stories" class="tab-pane">
+    <%= render 'stories/unread_stories', stories: @stories %>
+  </div>
+  <div id="favorite_stories" class="tab-pane">
+    <%= render 'stories/favorite_stories', stories: @stories %>
+  </div>
+</div>

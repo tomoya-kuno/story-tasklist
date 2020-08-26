@@ -1,0 +1,13 @@
+<div class="text-center" style="margin:25px 0px 25px 0px">
+  <h1>Custom</h1>
+  <font size='2' color='#999999'>睡眠や食事、仕事など</font>
+</div>
+
+<%= render 'custom_calendar', {tasks_first: @tasks_with_customs_first , tasks_second: @tasks_with_customs_second} %>
+
+<div class="text-center" style="margin:45px 0px 25px 0px">
+  <h1>New Custom</h1>
+  <font size='2' color='#999999'>新規の習慣を追加しよう</font>
+</div>
+
+<%= render 'custom_form', task: @task %>

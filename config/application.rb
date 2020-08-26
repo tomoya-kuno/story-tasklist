@@ -33,5 +33,7 @@ module StoryTasklist
     # time_zoneを東京に設定
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
+    # タイムゾーンを設定しようと考えていたのですが、dbに保存される時間が'Tokyo'ではなくなってしまうので、
+    # dbに保存する時間と普段扱う時間を揃えるために『config.time_zone = 'Tokyo'』をコメントアウトしました。
   end
 end

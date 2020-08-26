@@ -7,9 +7,11 @@ class CreateTasks < ActiveRecord::Migration[5.2]
       # taskの内容
       t.string :status
       # "done" or "not-done"
-      t.datetime :start_date
+      t.date :start_on
+      t.time :start_at
       # 開始日時
-      t.datetime :end_date
+      t.date :end_on
+      t.time :end_at
       # 終了日時
 
       t.timestamps

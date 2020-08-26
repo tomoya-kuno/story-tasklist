@@ -1,0 +1,28 @@
+<div class="row">
+  <aside class="col-md-5" style="margin:0px 0px 25px 0px">
+    <div class="card border-<%= @story.card_color %>">
+      <div class="card-header">
+        <h4 class="card-title"><%= @story.title %></h4>
+      </div>
+      <div class="card-body">
+        <% if @story.content != '' %>
+          <div style="margin:0px 0px 25px 0px">
+            <font size='2' color='#999999'>内容＆関連情報</font>
+            <br><%= @story.content %>
+          </div>
+        <% end %>  
+        <div style="padding: 5px 0px 5px 0px">
+          <div class="text-right">
+          <%= link_to 'edit', edit_story_path(@story) ,class: 'btn btn-success btn-sm'%>
+          <%= link_to 'delete', @story, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="col-md-7">
+    <%= render 'stories/stories_navbar' %>
+  </div>
+</div>
+
+

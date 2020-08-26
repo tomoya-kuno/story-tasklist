@@ -1,23 +1,32 @@
-<div class="row">
-  <aside class="col-sm-5">
-    <div class="card">
-      <div class="card-body">
-        <%= render 'form', task: @task %>
-      </div>
-    </div>
-  </aside>
-  <div class="col-sm-7">
-    <%= week_calendar events: @tasks do |date, tasks| %>
-      <%= date.day %>
-      <% tasks.each do |task| %>
-        <div>
-          <font size="2" color="#444444">
-            <%= task.start_date.strftime("%H:%M") %>
-            <br>~<%= task.end_date.strftime("%H:%M") %>
-            <br><%= link_to task.title, task %>
-          </font>
+<% if @task.status != 'custom' %>
+
+  <div class="row">
+    <aside class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <%= render 'form', task: @task %>
         </div>
-      <% end %>
-    <% end %>
+      </div>
+    </aside>
+    <div class="col-md-7">
+      <%= render 'tasks/tasks_navbar' %>
+    </div>
   </div>
+  
+<% else %>
+
+
+<div class="text-center" style="margin:0px 0px 25px 0px">
+  <h1>Edit Custom</h1>
 </div>
+
+<div style="margin:0px 0px 25px 0px">
+  <%= render 'custom_form', task: @task %>
+</div>
+
+<div style="margin:0px 0px 25px 0px">
+  <%= render 'custom_calendar', {tasks_first: @tasks_with_customs_first , tasks_second: @tasks_with_customs_second} %>
+</div>
+
+<% end %>
+

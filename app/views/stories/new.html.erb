@@ -1,0 +1,15 @@
+<div class="row">
+  <aside class="col-sm-5" style="margin:0px 0px 25px 0px">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">New Story</h4>
+      </div>
+      <div class="card-body">
+        <%= render 'stories/form' , story: @story %>
+      </div>
+    </div>
+  </aside>
+  <div class="col-sm-7">
+    <%= render 'stories/stories_navbar' %>
+  </div>
+</div>

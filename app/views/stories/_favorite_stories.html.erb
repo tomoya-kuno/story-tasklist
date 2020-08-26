@@ -1,0 +1,13 @@
+<% [3,2,1].each do |favorite_score_number| %>
+
+  <% stories.each do |story| %>
+
+    <% if story.favorite_score.to_i == favorite_score_number %>
+    
+      <%= render 'stories/story_card', story: story %>
+      
+    <% end %>
+
+  <% end %>
+  
+<% end %>

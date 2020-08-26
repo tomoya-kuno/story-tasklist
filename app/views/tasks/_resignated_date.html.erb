@@ -1,0 +1,145 @@
+<% previous_time = Time.parse("2000-1-1 15:00") %>
+<!--日本時間のTimeクラス00:00に合わせる-->
+<% resignated_month = resignated_date.month %>
+<% resignated_day = resignated_date.day %>
+<% resignated_week_day = resignated_date.wday %>
+<% fix = 0 %>
+<h4><%= resignated_date.strftime("%Y-%m-%d (%A)") %></h4>
+
+
+<% first_tasks.each do |task| %>
+
+<!--データベースに格納する値をタイムゾーンに反映することができたら必要のない処理-->
+<!--order('start_at')とするとき、dbに保存される時間にtimezoneが反映されずに並び替えがされたため、-->
+<!--一回目は9:00(データベース内のUCは0:00となっている)以降のタスクを反映させずにタスクを並べる。-->
+
+<% custom_task_go = 0 %>
+<!--リセット-->
+
+  <% if task.status =='custom' %>
+    <% border_color = 'warning' %>
+  <% elsif task.status == 'done'%>
+    <% border_color = 'success' %>
+  <% else %>
+    <% border_color = 'danger' %>
+  <% end %>
+  
+  <!--習慣タスク-->
+  <% if task.status == 'custom' %>
+    <% task.week_day_index.chars.each do |i| %>
+      <% if i == '月' %>
+        <% week_day = 1 %>
+      <% elsif i == '火' %>
+        <% week_day = 2 %>
+      <% elsif i == '水' %>
+        <% week_day = 3 %>
+      <% elsif i == '木' %>
+        <% week_day = 4 %>
+      <% elsif i == '金' %>
+        <% week_day = 5 %>
+      <% elsif i == '土' %>
+        <% week_day = 6 %>
+      <% elsif i == '日' %>
+        <% week_day = 0 %>
+      <% else %>
+        <% week_day = 7 %>
+      <% end %>
+      
+      <% if resignated_week_day == week_day %>
+        <% custom_task_go = 1 %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <% if ((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month))||(custom_task_go == 1) %>
+    
+    <% if previous_time < task.start_at %>
+      <% free_time = task.start_at - previous_time %>
+      <% free_time_hour = free_time / 3600 %>
+      <% free_time_minute = (free_time % 3600)/60 %>
+      <div class="card border-primary" style="margin: 25px ;padding: 15px">
+        <p>空き時間　　　<%= free_time_hour.floor %>時間<%= free_time_minute.floor %>分</p>
+      </div>
+    <% end %>
+    
+    <%= render 'tasks/task_card', task: task %>
+
+    <% if (task.end_at > previous_time)||((task.end_at < Time.parse("2000-1-1 15:00"))&&(task.end_at > Time.parse("2000-1-1 00:00"))) %>
+      <% previous_time = task.end_at %>
+      <% fix = 1 %>
+    <% end %>
+  <% end %>
+  
+<!--『 tasks.each do |task| 』のend-->
+<% end %>
+
+
+<% if fix != 1 %>
+  <%= previous_time = previous_time - 1.days %>
+<% end %>
+
+<% fix = 0 %>
+
+
+<!--データベースに格納する値をタイムゾーンに反映することができたら必要のない処理-->
+<!--order('start_at')とするとき、dbに保存される時間にtimezoneが反映されずに並び替えがされたため、-->
+<!--一回目は9:00(データベース内のUCは0:00となっている)以降のタスクを反映させずにタスクを並べる。-->
+
+<!--二回目は9:00以降のタスクのみで並べる-->
+
+<% second_tasks.each do |task| %>
+
+<% custom_task_go = 0 %>
+<!--リセット-->
+  
+  <!--習慣タスク-->
+  <% if task.status == 'custom' %>
+    <% task.week_day_index.chars.each do |i| %>
+      <% if i == '月' %>
+        <% week_day = 1 %>
+      <% elsif i == '火' %>
+        <% week_day = 2 %>
+      <% elsif i == '水' %>
+        <% week_day = 3 %>
+      <% elsif i == '木' %>
+        <% week_day = 4 %>
+      <% elsif i == '金' %>
+        <% week_day = 5 %>
+      <% elsif i == '土' %>
+        <% week_day = 6 %>
+      <% elsif i == '日' %>
+        <% week_day = 0 %>
+      <% else %>
+        <% week_day = 7 %>
+      <% end %>
+      
+      <% if resignated_week_day == week_day %>
+        <% custom_task_go = 1 %>
+      <% end %>
+    <% end %>
+  <% end %>
+  
+  <% if ((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month))||(custom_task_go == 1) %>
+    
+    <% if previous_time < task.start_at %>
+      <% free_time = task.start_at - previous_time %>
+      <% free_time_hour = free_time / 3600 %>
+      <% free_time_minute = (free_time % 3600)/60 %>
+      <div class="card border-primary" style="margin: 25px ;padding: 15px">
+        <p>空き時間　　　<%= free_time_hour.floor %>時間<%= free_time_minute.floor %>分</p>
+      </div>
+    <% end %>
+    
+    <%= render 'tasks/task_card', task: task %>
+
+    <% if task.end_at > previous_time %>
+      <% previous_time = task.end_at %>
+    <% end %>
+  <% end %>
+  
+<!--『 tasks.each do |task| 』のend-->
+<% end %>
+
+
+
+

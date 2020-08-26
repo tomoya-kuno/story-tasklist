@@ -1,26 +1,27 @@
 <!--ナビバー-->
 <ul class="nav nav-tabs nav-justified mb-3">
 <!--All……下記のナビバーをクリックすることにより、全てのタスクを表示する-->
-  <li class="nav-item"><a href="#all_tasks" class="nav-link active" data-toggle="tab">All Tasks</a></li>
+  <li class="nav-item"><a href="#all_tasks" class="nav-link active" data-toggle="tab">All of Tasks</a></li>
+  <li class="nav-item"><a href="#expired_tasks" class="nav-link" data-toggle="tab">Expired Tasks</a></li>
   <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
   <!--今日-->
-  <li class="nav-item"><a href="#today" class="nav-link" data-toggle="tab">Today</a></li>
+  <li class="nav-item"><a href="#today" class="nav-link" data-toggle="tab">Today Tasks</a></li>
   <!--明日-->
-  <li class="nav-item"><a href="#tomorrow" class="nav-link" data-toggle="tab">Tomorrow</a></li>
+  <li class="nav-item"><a href="#tomorrow" class="nav-link" data-toggle="tab">Tomorrow Tasks</a></li>
 </ul>
 
 <!--内容-->
 <div class="tab-content">
-  <!--All Tasks-->
   <div id="all_tasks" class="tab-pane active">
-    <%= render 'tasks/tasks', tasks: @tasks%>
+    <%= render 'tasks/tasks', tasks: @tasks %>
   </div>
-  <!--All Tasks-->
+  <div id="expired_tasks" class="tab-pane">
+    <%= render 'tasks/tasks', tasks: @expired_tasks %>
+  </div>
   <div id="today" class="tab-pane">
-    <%= render 'tasks/today', { tasks: @tasks , now: @now }%>
+    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @now }%>
   </div>
-  <!--All Tasks-->
   <div id="tomorrow" class="tab-pane">
-    <%= render 'tasks/tomorrow', { tasks: @tasks , now: @now }%>
+    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @tomorrow }%>
   </div>
 </div>

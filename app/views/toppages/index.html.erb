@@ -1,0 +1,115 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-7">
+      <h3>Welcome to the Story-Tasklist!</h3>
+      <div class="card">
+        <div class="card-header">目標</div>
+        <div class="card-body">
+          <%= current_user.target %>
+          <div style="padding: 5px 0px 5px 0px">
+            <div class="text-right">
+              <%= link_to 'ユーザー設定', edit_user_path(current_user), class: 'btn btn-lg btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 5px 0px 5px 10px">
+        <p>
+          ※１〜４のカードをクリックすると、それぞれのカテゴリーのページに移行します。
+        </p>
+      </div>
+    </aside>
+    <div class="col-md-5">
+      <div class="card linkbox border-success" style="padding: 15px;margin: 5px 0px 5px 0px">
+        <font size="5">1.Storylist</font>
+        <div style="padding: 5px 15px 15px 15px">
+          　これから読む(観る)予定の作品などをリスト化する管理ツール
+        </div>
+        <a href="/tasks"></a>
+      </div>
+      <div class="card linkbox border-primary" style="padding: 15px;margin: 5px 0px 5px 0px">
+        <font size="5">2.Tasklist</font>
+        <div style="padding: 5px 15px 15px 15px">
+          　ユーザーの空き時間を明確に表示することに特化した管理ツール
+        </div>
+        <a href="/tasks"></a>
+      </div>
+      <div class="card linkbox border-warning" style="padding: 15px;margin: 5px 0px 5px 0px">
+        <font size="5">3.Custom</font>
+        <div style="padding: 5px 15px 15px 15px">
+          　睡眠や食事、仕事などの日常的なタスクを作成・編集するツール
+        </div>
+        <a href="/tasks/custom"></a>
+      </div>
+      <div class="card linkbox border-danger" style="padding: 15px;margin: 5px 0px 5px 0px">
+        <font size="5">4.Calendar</font>
+        <div style="padding: 5px 15px 15px 15px">
+          　タスクを一ヶ月単位のカレンダーで表示するツール
+        </div>
+        <a href="/tasks/calendar"></a>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <aside class="col-md-7">
+      <div class="center home-content">
+        <div class="text-center" style="margin:25px 0px 45px 0px">
+          <h1 class="page-title">Story-Tasklist</h1>
+          <p>~ A service dedicated to those who love all stories ~</p>
+          <div style="padding: 5px 0px 10px 0px">
+          <%= link_to '新規登録', signup_path, class: 'btn btn-lg btn-primary' %>
+          </div>
+          <div style="padding: 5px 0px 10px 0px">
+          <%= link_to 'ログイン', login_path, class: 'btn btn-lg btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="col-md-5">
+      <div class="card border-danger mb-3" style="padding: 15px">
+        <font size="5">Story-Tasklistについて</font>
+        <div style="padding: 20px 15px 15px 15px">
+          　私自身、小説や映画などに没頭して今やるべきことを忘れてしまった経験が多々ありました。
+          <u>その原因は、自分の生活と趣味の両立が上手くできていないことにあります。</u>
+        </div>
+        <div style="padding: 15px">
+          <ul>
+            <li>これから読む(観る)予定の作品などをリスト化する『Storylist』機能</li>
+            <li>ユーザーの空き時間を明瞭に表示することに特化した『Tasklist』機能</li>
+          </ul>
+        </div>
+        <div style="padding: 5px 15px 15px 15px">
+         　この二つの機能を持つStory-Tasklistは、小説や映画などを趣味とするあなたの生活をサポートすることができます。全ての機能を無料で使うことができるので、是非登録してみてください。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin:15px 0px 15px 0px">
+    <div class="col-md-4">
+      <div class="card border-success mb-3" style="padding: 15px; margin:0px 5px 0px 5px">
+        <font size="5">モチベーション向上</font>
+        <div style="padding: 20px 15px 15px 15px">
+          タスクを設定することで『Tasklist』の一覧には、趣味に時間を当てることのできる空き時間が明瞭に表示されます。その時間内に読みたい作品を『Storylist』内でリスト化することで、日頃のタスクへのモチベーションを上げることができます。
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-primary mb-3" style="padding: 15px; margin:0px 5px 0px 5px">
+        <font size="5">シンプルなデザインと操作性</font>
+        <div style="padding: 20px 15px 15px 15px">
+          タスク管理の基本操作は①タスクを設定し、②それぞれのタスク件名に右隣にある『Not Done』のボタンをクリックして『Done』に切り替えるだけ。また、睡眠や食事、仕事などの日常的なタスクは『Custom』という編集ページから週単位で設定することができます。
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-warning mb-3" style="padding: 15px; margin:0px 5px 0px 5px">
+        <font size="5">タスクの遂行度合いを表示</font>
+        <div style="padding: 20px 15px 15px 15px">
+        　設定した期間の過ぎたタスクは、“期間切れタスク一覧”に表示されます。それを確認することによって、達成できたタスク・達成できなかったタスクの量をそれぞれ把握することができます。
+        </div>
+      </div>
+    </div>
+    
+  </div>
+<% end %>

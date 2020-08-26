@@ -1,0 +1,38 @@
+<div style="margin:25px 0px 25px 0px">
+  
+  <%= form_with(model: @task, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :title, '件名(12文字以下)' %>
+        <%= f.text_field :title ,class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content, '内容&関連情報' %>
+        <%= f.text_area :content, rows: 5 ,class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :week_day_index,'曜日' %>
+          <% ["月","火","水","木","金","土","日"].each do |week_day_index| %>
+          <%= f.check_box :week_day_index, {multiple: true}, week_day_index, nil %>
+          <%= week_day_index %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :title, '開始時間' %>
+        <%= f.time_select :start_at ,class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content, '終了時間' %>
+        <%= f.time_select :end_at ,class: 'form-control' %>
+      </div>
+      <%= f.hidden_field :status, :value => "custom" %>
+      <%= f.hidden_field :start_on, :value => Time.zone.now %>
+      <%= f.hidden_field :end_on, :value => Time.zone.now %>
+      <%= f.submit 'Add', class: 'btn btn-primary btn-block'%>
+  <% end %>
+  
+</div>
+
+
+
+

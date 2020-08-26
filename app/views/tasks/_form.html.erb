@@ -10,12 +10,23 @@
       <font size='1' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
     </div>
     <div class="form-group">
-      <%= f.label :title, '開始日時' %>
-      <%= f.datetime_select :start_date ,class: 'form-control' %>
+      <%= f.label :start_on, '開始日' %>
+      <%= f.date_select :start_on ,class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :content, '終了日時' %>
-      <%= f.datetime_select :end_date ,class: 'form-control' %>
+      <%= f.label :start_at, '開始時刻' %>
+      <%= f.time_select :start_at ,class: 'form-control' %>
     </div>
+    <div class="form-group">
+      <%= f.label :end_on, '終了日' %>
+      <%= f.date_select :end_on ,class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :end_at, '終了時刻' %>
+      <%= f.time_select :end_at ,class: 'form-control' %>
+    </div>
+    <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
+    <!--エラー防止-->
     <%= f.submit 'Add', class: 'btn btn-primary btn-block'%>
-<% end %>
+  <% end %>
+  

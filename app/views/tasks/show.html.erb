@@ -1,43 +1,36 @@
 <div class="row">
-  <aside class="col-sm-5">
+  <aside class="col-md-5" style="margin:0px 0px 25px 0px">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title"><%= @task.title %></h4>
       </div>
       <div class="card-body">
-        <font size='2' color='#999999'>内容＆関連情報</font>
-        <br>
-        <font size='1' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
-        <br>
-        <%= @task.content %>
-        <br>
-        <br>
-        <font size='2' color='#999999'>タスク実行日時</font>
-        <br>
-        <%= @task.start_date.strftime("%Y-%m-%d %H:%M") %>~
-        <br>
-        <%= @task.end_date.strftime("%Y-%m-%d %H:%M") %>
-        <table>
-          <tr>
-            <td><%= link_to 'edit', edit_task_path(@task) ,class: 'btn btn-success btn-sm'%></td>
-            <td><%= link_to 'delete', @task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%></td>
-          </tr>
-        </table>
+        <% if @task.content != '' %>
+          <div style="margin:0px 0px 25px 0px">
+            <font size='2' color='#999999'>内容＆関連情報</font>
+            <br><%= @task.content %>
+          </div>
+        <% end %>
+        タスク実行日時
+        <% if @task.status == 'custom' %>
+          (<%= @task.week_day_index %>)曜日
+          <%= @task.start_at.strftime("%H時%M分") %>~<%= @task.end_at.strftime("%H時%M分") %>
+        <% else %>
+          <%= @task.start_on.strftime("%Y年%m月%d日") %><%= @task.start_at.strftime("%H時%M分") %>~
+          <br>
+          <%= @task.end_on.strftime("%Y年%m月%d日") %><%= @task.end_at.strftime("%H時%M分") %>
+        <% end %>
+        <div style="padding: 5px 0px 5px 0px">
+          <div class="text-right">
+          <%= link_to 'edit', edit_task_path(@task) ,class: 'btn btn-success btn-sm'%>
+          <%= link_to 'delete', @task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
+          </div>
+        </div>
       </div>
     </div>
   </aside>
-  <div class="col-sm-7">
-    <%= week_calendar events: @tasks do |date, tasks| %>
-      <%= date.day %>
-      <% tasks.each do |task| %>
-        <div>
-          <font size="2" color="#444444">
-            <%= task.start_date.strftime("%H:%M") %>
-            <br>~<%= task.end_date.strftime("%H:%M") %>
-            <br><%= link_to task.title, task %>
-          </font>
-        </div>
-      <% end %>
-    <% end %>
+  <div class="col-md-7">
+    <%= render 'tasks/tasks_navbar' %>
   </div>
 </div>
+

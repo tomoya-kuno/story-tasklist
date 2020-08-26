@@ -1,30 +1,9 @@
-<% if logged_in? %>
-  <div class="row">
-    <aside class="col-sm-5">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Tasklist</h4>
-        </div>
-        <div class="card-body">
-          <!--ユーザーの目標を記入する欄-->
-        </div>
-      </div>
-      <%= link_to '新規タスクの追加', new_task_path %>
-      <%= @now.strftime("%Y-%m-%d %H:%M") %>
-      <!-- render '../..', ..: @.. -->
-      <!--ボタンを押すとtask新規作成画面に移行する-->
-    </aside>
-    <div class="col-sm-7">
-      <%= render 'tasks/tasks_navbar' %>
-    </div>
-  </div>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the Story-Tasklist</h1>
-      <p>~ A service dedicated to those who love all stories ~</p>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
-      <%= link_to 'Login!', login_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
-<% end %>
+<div class="text-center">
+  <h1>Tasklist</h1>
+  <font size='2' color='#999999'>空き時間表示に特化したタスク管理表</font>
+</div>
+<div class="text-center" style="margin:25px 0px 45px 0px">
+  <p><%= link_to '新規タスクの追加', new_task_path, class: 'btn btn-lg btn-primary btn-sm' %></p>
+  <font size='2' color='#999999'>詳細の確認・編集・削除をする際はカードフレームをクリック</font>
+</div>
+<%= render 'tasks/tasks_navbar' %>
