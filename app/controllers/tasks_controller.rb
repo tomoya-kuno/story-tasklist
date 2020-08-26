@@ -109,6 +109,9 @@ class TasksController < ApplicationController
     if params[:task][:week_day_index] != nil
       params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
       # week_day_indexに入れる曜日指定をstring型に変換する
+    else
+      flash.now[:danger] = 'Task が設定されませんでした'
+      redirect_to '/tasks/custom'
     end
   end
 end
