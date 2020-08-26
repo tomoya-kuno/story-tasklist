@@ -20,6 +20,9 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build
   end
   
+  def custom_alert
+  end
+  
   def new
     @task = current_user.tasks.build
   end
@@ -111,7 +114,7 @@ class TasksController < ApplicationController
       # week_day_indexに入れる曜日指定をstring型に変換する
     else
       flash.now[:danger] = 'Task が設定されませんでした'
-      redirect_to '/tasks/custom'
+      redirect_to '/tasks/custom_alert'
     end
   end
 end

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   collection do
       get 'calendar', to: 'tasks#calendar'
       get 'custom', to: 'tasks#custom'
+      get 'custom_alert', to: 'tasks#custom_alert'
     end
   end
   
