@@ -106,7 +106,9 @@ class TasksController < ApplicationController
   end
   
   def week_day_index_string
-    params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
+    if params[:task][:week_day_index] != nil
+      params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
       # week_day_indexに入れる曜日指定をstring型に変換する
+    end
   end
 end
