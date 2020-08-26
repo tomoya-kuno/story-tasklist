@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-header">目標</div>
         <div class="card-body">
-          <% if current_user.target == '' %>
+          <% if (current_user.target == '')||(current_user.target == nil) %>
             達成したい目標があれば編集し、ここに表示することができます。編集する際は、『ユーザー設定』をクリックしてください。
           <% else %>
             <%= current_user.target %>
