@@ -13,7 +13,7 @@
 <div class="card linkbox border-<%= border_color %>" style="margin: 25px ;padding: 15px">
   <a href="/tasks/<%= task.id %>"></a>
   <div class="row">
-    <div class="col-9">
+    <div class="col-8">
       <%= task.start_at.strftime("%H:%M") %>~<%= task.end_at.strftime("%H:%M") %>
       <br>
       <%= task.title %>
@@ -25,14 +25,14 @@
             <%= f.hidden_field :status, :value => "not_done" %>
             <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
             <!--エラー防止-->
-            <%= f.submit 'done', class: 'btn btn-success btn-sm'%>
+            <%= f.submit '達成済', class: 'btn btn-success btn-sm'%>
           <% end %>
         <% else %>
           <%= form_with(model: task, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "done" %>
             <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
             <!--エラー防止-->
-            <%= f.submit 'not_done', class: 'btn btn-danger btn-sm'%>
+            <%= f.submit '未達成', class: 'btn btn-danger btn-sm'%>
           <% end %>
         <% end %>
       <% end %>
@@ -46,7 +46,7 @@
 <div class="card linkbox border-<%= border_color %>" style="margin: 25px ;padding: 15px">
   <a href="/tasks/<%= task.id %>"></a>
   <div class="row">
-    <div class="col-11">
+    <div class="col-10">
       <%= task.start_at.strftime("%H:%M") %>~<%= task.end_at.strftime("%H:%M") %>
       <br>
       <%= task.title %>

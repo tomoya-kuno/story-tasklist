@@ -2,9 +2,11 @@
   <h1>Storylist</h1>
   <font size='2' color='#999999'>小説、映画、ドラマなど</font>
 </div>
-<div class="text-center" style="margin:25px 0px 45px 0px">
+<div class="text-center" style="margin:25px 20px 45px 20px">
   <p><%= link_to '新規ストーリーの追加', new_story_path, class: 'btn btn-lg btn-primary btn-sm' %></p>
   <font size='2' color='#999999'>詳細の確認・編集・削除をする際はカードフレームをクリック</font>
+  <br>
+  <font size='2' color='#999999'>鑑賞した作品は“未鑑賞”をクリックし、“鑑賞済”に表示変換する</font>
 </div>
 
 <%= render 'stories/stories_navbar' %>
