@@ -17,11 +17,10 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
   
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = 'user情報は正常に更新されました'
       redirect_to root_url
