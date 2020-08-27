@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
   
   def update
+    @user = User.find(current_user.id)
     if @user.update(user_params)
       flash[:success] = 'user情報は正常に更新されました'
       redirect_to root_url

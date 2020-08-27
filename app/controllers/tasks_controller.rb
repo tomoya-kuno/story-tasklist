@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only:[:show,:edit,:update,:destroy]
   before_action :set_task, only:[:show,:edit,:update,:destroy]
   before_action :set_tasklist, only:[:index,:show,:calendar,:custom,:new,:create,:edit,:update]
   before_action :set_now_datetime, only:[:index,:show,:new,:create,:edit,:update]
@@ -85,8 +85,8 @@ class TasksController < ApplicationController
   end
   
   def set_tasklist
-    @tasks = current_user.tasks.order('start_at').where("tasks.end_on >= ?", Time.zone.now).page(params[:page])
-    @expired_tasks = current_user.tasks.order('start_on').order('start_at').where("tasks.start_on <= ?", Time.zone.now).page(params[:page])
+    @tasks = current_user.tasks.order('start_at').where("tasks.start_on >= ?", Time.now.beginning_of_day).page(params[:page])
+    @expired_tasks = current_user.tasks.order('start_on').order('start_at').where("tasks.start_on < ?", Time.now.beginning_of_day).page(params[:page])
     # 習慣タスクとの併合版 @tasks_with_customs の作成。
     @tasks_with_customs_first = current_user.tasks.order('start_at').where("tasks.start_at >=?",Time.parse("2000-1-1 15:00")).page(params[:page])
     @tasks_with_customs_second = current_user.tasks.order('start_at').where("tasks.start_at <=?",Time.parse("2000-1-1 15:00")).where("tasks.end_at <=?",Time.parse("2000-1-1 15:00")).page(params[:page])

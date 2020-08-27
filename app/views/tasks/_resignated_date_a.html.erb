@@ -57,6 +57,9 @@
       <% free_time = task.start_at - previous_time %>
       <% free_time_hour = free_time / 3600 %>
       <% free_time_minute = (free_time % 3600)/60 %>
+      <div class="card border-primary" style="margin: 25px ;padding: 15px">
+        <p>空き時間　　　<%= free_time_hour.floor %>時間<%= free_time_minute.floor %>分</p>
+      </div>
     <% end %>
     
     <%= render 'tasks/task_card', task: task %>
@@ -122,6 +125,9 @@
       <% free_time = task.start_at - previous_time %>
       <% free_time_hour = free_time / 3600 %>
       <% free_time_minute = (free_time % 3600)/60 %>
+      <div class="card border-primary" style="margin: 25px ;padding: 15px">
+        <p>空き時間　　　<%= free_time_hour.floor %>時間<%= free_time_minute.floor %>分</p>
+      </div>
     <% end %>
     
     <%= render 'tasks/task_card', task: task %>
