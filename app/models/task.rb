@@ -5,7 +5,6 @@ class Task < ApplicationRecord
   
   # validate :date_cannot_be_in_the_past
   validate :end_at_cannot_be_greater_than_start_at
-  validate :end_on_cannot_be_greater_than_start_on
   
   def date_cannot_be_in_the_past
     if (start_on.present?)&&(start_on < Date.today)
@@ -16,12 +15,6 @@ class Task < ApplicationRecord
   def end_at_cannot_be_greater_than_start_at
     if (start_on.present?)&&(end_on.present?)&&(start_at > end_at)
       errors.add(:end_at,"開始時刻が終了時刻を上回ることはできません")
-    end
-  end
-  
-  def end_on_cannot_be_greater_than_start_on
-    if (start_on.present?)&&(end_on.present?)&&(start_on != end_on)
-      errors.add(:end_on,"終了日は開始日と同日にしてください")
     end
   end
   

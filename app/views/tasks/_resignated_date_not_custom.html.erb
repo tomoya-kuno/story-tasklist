@@ -4,13 +4,13 @@
 <% resignated_day = resignated_date.day %>
 
 <% first_tasks.each do |task| %>
-  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month)))&&(task.status != 'custom') %>
+  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month)))&&(task.status != 'custom') %>
     <%= render 'tasks/task_card', task: task %>
   <% end %>
 <% end %>
 
 <% second_tasks.each do |task| %>
-  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month)))&&(task.status != 'custom') %>
+  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month)))&&(task.status != 'custom') %>
     <%= render 'tasks/task_card', task: task %>
   <% end %>
 <% end %>

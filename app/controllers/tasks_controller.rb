@@ -94,8 +94,8 @@ class TasksController < ApplicationController
   end
   
   def set_tasklist
-    @tasks = current_user.tasks.where("tasks.end_on >= ?", Time.now.beginning_of_day).order('start_at').page(params[:page])
-    @expired_tasks = current_user.tasks.where("tasks.end_on < ?", Time.now.beginning_of_day).order('start_on').order('start_at').page(params[:page])
+    @tasks = current_user.tasks.where("tasks.start_on >= ?", Time.now.beginning_of_day).order('start_on').order('start_at').page(params[:page])
+    @expired_tasks = current_user.tasks.where("tasks.start_on < ?", Time.now.beginning_of_day).order('start_on').order('start_at').page(params[:page])
     # 習慣タスクとの併合版 @tasks_with_customs の作成。
     @tasks_with_customs_first = current_user.tasks.where("tasks.end_at >=?",Time.parse("2000-1-1 15:00")).or(current_user.tasks.where("tasks.start_at >=?",Time.parse("2000-1-1 15:00"))).order('start_at').page(params[:page])
     @tasks_with_customs_second = current_user.tasks.where("tasks.end_at <?",Time.parse("2000-1-1 15:00")).where("tasks.start_at <?",Time.parse("2000-1-1 15:00")).order('start_at').page(params[:page])
