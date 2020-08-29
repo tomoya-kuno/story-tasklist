@@ -2,7 +2,6 @@ class Task < ApplicationRecord
   belongs_to :user
   validates :title, presence: true, length: { maximum: 12 }
   validates :content, length: { maximum: 255 }
-  validates :week_day_index, presence: true
   
   # validate :date_cannot_be_in_the_past
   validate :end_at_cannot_be_greater_than_start_at
