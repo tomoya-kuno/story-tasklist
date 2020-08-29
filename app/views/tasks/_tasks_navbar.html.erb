@@ -1,9 +1,10 @@
+
 <!--ナビバー-->
 <ul class="nav nav-tabs nav-justified mb-3">
 <!--All……下記のナビバーをクリックすることにより、全てのタスクを表示する-->
-  <li class="nav-item"><a href="#all" class="nav-link" data-toggle="tab">All</a></li>
-  <li class="nav-item"><a href="#todo" class="nav-link active" data-toggle="tab">ToDo</a></li>
-  <li class="nav-item"><a href="#expired" class="nav-link" data-toggle="tab">Expired</a></li>
+  <li class="nav-item"><a href="#all" class="nav-link" data-toggle="tab">All Tasks</a></li>
+  <li class="nav-item"><a href="#todo" class="nav-link active" data-toggle="tab">ToDo Tasks</a></li>
+  <li class="nav-item"><a href="#expired" class="nav-link" data-toggle="tab">Expired Tasks</a></li>
   <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
 </ul>
 
@@ -13,27 +14,27 @@
   
   <div id="all" class="tab-pane">
     <div class ="text-center" style="margin:25px 10px 25px 10px">
-      <font size='2' color='#999999'>全てのタスク</font><br>
-      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired』に移る</font>
+      <font size='2' color='#999999'>これからの全てのタスク</font><br>
+      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired Tasks』に移る</font>
     </div>
-    <%= render 'tasks/tasks', tasks: @tasks %>
+    <%= render 'tasks/tasks',{tasks: @tasks , date: @setting.date }%>
   </div>
   
   <div id="todo" class="tab-pane active">
     <div class ="text-center" style="margin:25px 10px 25px 10px">
       <font size='2' color='#999999'>これから達成すべき全てのタスク</font><br>
-      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired』に移る</font><br>
+      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired Tasks』に移る</font><br>
       <font size='2' color='#999999'>終了時刻が過ぎても諦めず、タスク達成に努めましょう</font>
     </div>
-    <%= render 'tasks/todo_tasks', tasks: @tasks %>
+    <%= render 'tasks/todo_tasks',{tasks: @tasks , date: @setting.date} %>
   </div>
   
   <div id="expired" class="tab-pane">
     <div class ="text-center" style="margin:25px 10px 25px 10px">
-      <font size='2' color='#999999'>期限の過ぎた全てのタスク</font><br>
+      <font size='2' color='#999999'>終了期限の過ぎた全てのタスク</font><br>
       <font size='2' color='#999999'>それぞれのタスクを次の予定に再編集、もしくは消去しましょう</font>
     </div>
-    <%= render 'tasks/tasks', tasks: @expired_tasks %>
+    <%= render 'tasks/tasks',{tasks: @expired_tasks , date: @setting.date} %>
   </div>
   
 </div>

@@ -27,7 +27,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    
     @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'Task が正常に設定されました'
@@ -99,6 +98,8 @@ class TasksController < ApplicationController
     # 習慣タスクとの併合版 @tasks_with_customs の作成。
     @tasks_with_customs_first = current_user.tasks.where("tasks.end_at >=?",Time.parse("2000-1-1 15:00")).or(current_user.tasks.where("tasks.start_at >=?",Time.parse("2000-1-1 15:00"))).order('start_at').page(params[:page])
     @tasks_with_customs_second = current_user.tasks.where("tasks.end_at <?",Time.parse("2000-1-1 15:00")).where("tasks.start_at <?",Time.parse("2000-1-1 15:00")).order('start_at').page(params[:page])
+    @setting = ActiveSupport::OrderedOptions.new
+    @setting.date = params[:date]
   end
   
   def set_now_datetime
