@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   end
   
   def end_at_cannot_be_greater_than_start_at
-    if (start_on.present?)&&(end_on.present?)&&(start_at > end_at)
+    if (start_on.present?)&&(start_at > end_at)
       errors.add(:end_at,"開始時刻が終了時刻を上回ることはできません")
     end
   end
