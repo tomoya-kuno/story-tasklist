@@ -1,48 +1,38 @@
 <% if current_page?(stories_path) %>
 <!--story一覧ページでのカードの表記-->
 
-
   <div class="card linkbox border-<%= story.card_color %>" style="margin: 25px ; padding: 15px">
-    <a href="/stories/<%= story.id %>"></a>
     <div class="row">
-      <div class="col-7">
-        <%= story.title %>
+      <div class="col-9">
+        <table>
+          <tr>
+            <td align="left"><%= story.title %></td>
+            <td align="right">
+              <% if story.favorite_score == '1' %>
+                ☆１
+              <% elsif story.favorite_score == '2' %>
+                ☆２
+              <% elsif story.favorite_score == '3' %>
+                ☆３
+              <% else %>
+                ☆０
+              <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div class="col-2">
+      <a href="/stories/<%= story.id %>"></a>
+      <div class="col-1">
+        <!--鑑賞済or未鑑賞-->
         <% if story.status == 'read' %>
           <%= form_with(model: story, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "unread" %>
-            <%= f.submit '未鑑賞', class: 'btn btn-success btn-sm'%>
+            <%= f.submit '鑑賞済', class: 'btn btn-success btn-sm'%>
           <% end %>
         <% else %>
           <%= form_with(model: story, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "read" %>
-            <%= f.submit '鑑賞済', class: 'btn btn-danger btn-sm'%>
-          <% end %>
-        <% end %>
-        
-      </div>
-      <div class="col-1">
-        
-        <% if story.favorite_score == '1' %>
-          <%= form_with(model: story, local: true) do |f| %>
-            <%= f.hidden_field :favorite_score, :value => "2" %>
-            <%= f.submit '☆1', class: 'btn btn-success btn-sm'%>
-          <% end %>
-        <% elsif story.favorite_score == '2' %>
-          <%= form_with(model: story, local: true) do |f| %>
-            <%= f.hidden_field :favorite_score, :value => "3" %>
-            <%= f.submit '☆2', class: 'btn btn-success btn-sm'%>
-          <% end %>
-        <% elsif story.favorite_score == '3' %>
-          <%= form_with(model: story, local: true) do |f| %>
-            <%= f.hidden_field :favorite_score, :value => "0" %>
-            <%= f.submit '☆3', class: 'btn btn-success btn-sm'%>
-          <% end %>
-        <% else %>
-          <%= form_with(model: story, local: true) do |f| %>
-            <%= f.hidden_field :favorite_score, :value => "1" %>
-            <%= f.submit '☆0', class: 'btn btn-danger btn-sm'%>
+            <%= f.submit '未鑑賞', class: 'btn btn-danger btn-sm'%>
           <% end %>
         <% end %>
       </div>
@@ -56,22 +46,22 @@
 
   <div class="card linkbox border-<%= story.card_color %>" style="margin: 25px ; padding: 15px">
     <a href="/stories/<%= story.id %>"></a>
-    <div class="row">
-      <div class="col-9">
-        <%= story.title %>
-      </div>
-      <div class="col-2">
-        <% if story.favorite_score == '1' %>
-          ☆１
-        <% elsif story.favorite_score == '2' %>
-          ☆２
-        <% elsif story.favorite_score == '3' %>
-          ☆３
-        <% else %>
-          ☆０
-        <% end %>
-      </div>
-    </div>
+      <table>
+        <tr>
+          <td align="left"><%= story.title %></td>
+          <td align="right">
+            <% if story.favorite_score == '1' %>
+              ☆１
+            <% elsif story.favorite_score == '2' %>
+              ☆２
+            <% elsif story.favorite_score == '3' %>
+              ☆３
+            <% else %>
+              ☆０
+            <% end %>
+          </td>
+        </tr>
+      </table>
   </div>
   
   

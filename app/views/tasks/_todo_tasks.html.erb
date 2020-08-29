@@ -3,14 +3,13 @@
 
 <% tasks.each do |task| %>
   
-  <% if task.status != 'custom' %>
+  <% if (task.status != 'custom')&&(task.status != 'done') %>
   <% if (task.start_on.day != previous_day)||(task.start_on.month != previous_month) %>
     <h4><%= task.start_on.strftime("%Y-%m-%d (%A)") %></h4>
     <% previous_day = task.start_on.day %>
     <% previous_month = task.start_on.month %>
-    <%= render 'tasks/resignated_date_not_custom', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: task.start_on }%>
+    <%= render 'tasks/resignated_date_not_custom_todo', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: task.start_on }%>
   <% end %>
   <% end %>
   
 <% end %>
-  

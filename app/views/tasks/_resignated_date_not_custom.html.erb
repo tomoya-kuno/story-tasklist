@@ -1,0 +1,17 @@
+<% previous_time = Time.parse("2000-1-1 15:00") %>
+<!--日本時間のTimeクラス00:00に合わせる-->
+<% resignated_month = resignated_date.month %>
+<% resignated_day = resignated_date.day %>
+
+<% first_tasks.each do |task| %>
+  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month)))&&(task.status != 'custom') %>
+    <%= render 'tasks/task_card', task: task %>
+  <% end %>
+<% end %>
+
+<% second_tasks.each do |task| %>
+  <% if (((task.start_on.day == resignated_day)&&(task.start_on.month == resignated_month))||((task.end_on.day == resignated_day)&&(task.end_on.month == resignated_month)))&&(task.status != 'custom') %>
+    <%= render 'tasks/task_card', task: task %>
+  <% end %>
+<% end %>
+

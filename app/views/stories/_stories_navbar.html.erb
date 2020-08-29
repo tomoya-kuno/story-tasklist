@@ -1,22 +1,32 @@
 <!--ナビバー-->
 <ul class="nav nav-tabs nav-justified mb-3">
 <!--All……下記のナビバーをクリックすることにより、全てのストーリーを表示する-->
-  <li class="nav-item"><a href="#all_stories" class="nav-link active" data-toggle="tab">All Stories</a></li>
+  <li class="nav-item"><a href="#all_stories" class="nav-link" data-toggle="tab">All Stories</a></li>
   <!--今日-->
-  <li class="nav-item"><a href="#unread_stories" class="nav-link" data-toggle="tab">Unread Stories</a></li>
+  <li class="nav-item"><a href="#unread_stories" class="nav-link active" data-toggle="tab">Unread Stories</a></li>
   <!--明日-->
   <li class="nav-item"><a href="#favorite_stories" class="nav-link" data-toggle="tab">Favorite Stories</a></li>
 </ul>
 
 <!--内容-->
 <div class="tab-content">
-  <div id="all_stories" class="tab-pane active">
+  <div id="all_stories" class="tab-pane">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>全ての作品</font>
+    </div>
     <%= render 'stories/stories', stories: @stories %>
   </div>
-  <div id="unread_stories" class="tab-pane">
+  <div id="unread_stories" class="tab-pane active">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>全ての未鑑賞の作品</font>
+    </div>
     <%= render 'stories/unread_stories', stories: @stories %>
   </div>
   <div id="favorite_stories" class="tab-pane">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>全てのお気に入り作品</font><br>
+      <font size='2' color='#999999'>お気に入り評価値の高い順に並んでいます</font>
+    </div>
     <%= render 'stories/favorite_stories', stories: @stories %>
   </div>
 </div>

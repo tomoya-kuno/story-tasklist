@@ -11,19 +11,21 @@
             <br><%= @task.content %>
           </div>
         <% end %>
-        タスク実行日時
+        <font size='2' color='#999999'>内容＆関連情報</font><br>
         <% if @task.status == 'custom' %>
           (<%= @task.week_day_index %>)曜日
-          <%= @task.start_at.strftime("%H時%M分") %>~<%= @task.end_at.strftime("%H時%M分") %>
-        <% else %>
-          <%= @task.start_on.strftime("%Y年%m月%d日") %><%= @task.start_at.strftime("%H時%M分") %>~
+          <%= @task.start_at.strftime("開始:%H時%M分") %>
           <br>
-          <%= @task.end_on.strftime("%Y年%m月%d日") %><%= @task.end_at.strftime("%H時%M分") %>
+          <%= @task.end_at.strftime("終了:%H時%M分") %>
+        <% else %>
+          <%= @task.start_on.strftime("開始:%Y年%m月%d日") %><%= @task.start_at.strftime("%H時%M分") %>
+          <br>
+          <%= @task.end_on.strftime("終了:%Y年%m月%d日") %><%= @task.end_at.strftime("%H時%M分") %>
         <% end %>
         <div style="padding: 5px 0px 5px 0px">
           <div class="text-right">
-          <%= link_to 'edit', edit_task_path(@task) ,class: 'btn btn-success btn-sm'%>
-          <%= link_to 'delete', @task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
+          <%= link_to '編集', edit_task_path(@task) ,class: 'btn btn-success btn-sm'%>
+          <%= link_to '消去', @task, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
           </div>
         </div>
       </div>

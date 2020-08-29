@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   before_action :set_task, only:[:show,:edit,:update,:destroy]
   before_action :set_tasklist, only:[:index,:show,:calendar,:custom,:new,:create,:edit,:update]
   before_action :set_now_datetime, only:[:index,:show,:new,:create,:edit,:update]
-  before_action :week_day_index_string, only:[:create,:update]
   
   def index
   end
@@ -28,6 +27,14 @@ class TasksController < ApplicationController
   end
 
   def create
+    if params[:task][:week_day_index] != nil
+      params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
+      # week_day_indexに入れる曜日指定をstring型に変換する
+    else
+      flash.now[:danger] = 'Task が設定されませんでした'
+      redirect_to '/tasks/custom_alert'
+    end
+    
     @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'Task が正常に設定されました'
@@ -50,6 +57,15 @@ class TasksController < ApplicationController
   end
 
   def update
+    
+    if params[:task][:week_day_index] != nil
+      params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
+      # week_day_indexに入れる曜日指定をstring型に変換する
+    else
+      flash.now[:danger] = 'Task が設定されませんでした'
+      redirect_to '/tasks/custom_alert'
+    end
+    
     if @task.update(task_params)
       flash[:success] = 'Task は正常に更新されました'
       if @task.status == 'custom'
@@ -85,16 +101,15 @@ class TasksController < ApplicationController
   end
   
   def set_tasklist
-    @tasks = current_user.tasks.order('start_at').where("tasks.start_on >= ?", Time.now.beginning_of_day).page(params[:page])
-    @expired_tasks = current_user.tasks.order('start_on').order('start_at').where("tasks.start_on < ?", Time.now.beginning_of_day).page(params[:page])
+    @tasks = current_user.tasks.where("tasks.end_on >= ?", Time.now.beginning_of_day).order('start_at').page(params[:page])
+    @expired_tasks = current_user.tasks.where("tasks.end_on < ?", Time.now.beginning_of_day).order('start_on').order('start_at').page(params[:page])
     # 習慣タスクとの併合版 @tasks_with_customs の作成。
-    @tasks_with_customs_first = current_user.tasks.order('start_at').where("tasks.start_at >=?",Time.parse("2000-1-1 15:00")).page(params[:page])
-    @tasks_with_customs_second = current_user.tasks.order('start_at').where("tasks.start_at <=?",Time.parse("2000-1-1 15:00")).where("tasks.end_at <=?",Time.parse("2000-1-1 15:00")).page(params[:page])
+    @tasks_with_customs_first = current_user.tasks.where("tasks.end_at >=?",Time.parse("2000-1-1 15:00")).or(current_user.tasks.where("tasks.start_at >=?",Time.parse("2000-1-1 15:00"))).order('start_at').page(params[:page])
+    @tasks_with_customs_second = current_user.tasks.where("tasks.end_at <?",Time.parse("2000-1-1 15:00")).where("tasks.start_at <?",Time.parse("2000-1-1 15:00")).order('start_at').page(params[:page])
   end
   
   def set_now_datetime
     @now = Time.zone.now
-    @tomorrow = @now + 1.days
   end
   
   def task_params
@@ -108,13 +123,4 @@ class TasksController < ApplicationController
     end
   end
   
-  def week_day_index_string
-    if params[:task][:week_day_index] != nil
-      params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
-      # week_day_indexに入れる曜日指定をstring型に変換する
-    else
-      flash.now[:danger] = 'Task が設定されませんでした'
-      redirect_to '/tasks/custom_alert'
-    end
-  end
 end

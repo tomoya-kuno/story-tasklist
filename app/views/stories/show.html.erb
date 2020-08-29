@@ -10,11 +10,11 @@
             <font size='2' color='#999999'>内容＆関連情報</font>
             <br><%= @story.content %>
           </div>
-        <% end %>  
+        <% end %>
         <div style="padding: 5px 0px 5px 0px">
           <div class="text-right">
-          <%= link_to 'edit', edit_story_path(@story) ,class: 'btn btn-success btn-sm'%>
-          <%= link_to 'delete', @story, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
+          <%= link_to '編集', edit_story_path(@story) ,class: 'btn btn-success btn-sm'%>
+          <%= link_to '消去', @story, method: :delete, data: { confirm: 'You sure?' } ,class: 'btn btn-danger btn-sm'%>
           </div>
         </div>
       </div>

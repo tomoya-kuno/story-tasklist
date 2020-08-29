@@ -1,4 +1,10 @@
+<div style="margin:10px 5px 10px 5px">
+  <font size='2' color='#999999'>件名・実行日時の色は入力必須</font><br>
+  <font size='2' color='#999999'>開始日と終了日は同日のみなので、日付を跨ぐタスクは23:00~23:59と0:00~1:00のように分けて編集してください</font>
+</div>
+
 <%= form_with(model: @task, local: true) do |f| %>
+
   <%= render 'layouts/error_messages', model: f.object %>
     <div class="form-group">
       <%= f.label :title, '件名(12文字以下)' %>
@@ -7,7 +13,7 @@
     <div class="form-group">
       <%= f.label :content, '内容&関連情報' %>
       <%= f.text_area :content, rows: 5 ,class: 'form-control' %>
-      <font size='1' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
+      <font size='2' color='#999999'>※例：(課題提出先：佐藤教授(A999室,〆切2/2(月))</font>
     </div>
     <div class="form-group">
       <%= f.label :start_on, '開始日' %>
@@ -28,5 +34,5 @@
     <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
     <!--エラー防止-->
     <%= f.submit 'Add', class: 'btn btn-primary btn-block'%>
-  <% end %>
+<% end %>
   

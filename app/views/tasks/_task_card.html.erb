@@ -6,33 +6,32 @@
   <% border_color = 'danger' %>
 <% end %>
 
-
 <% if current_page?(tasks_path) %>
 <!--task一覧ページでのカードの表記-->
 
 <div class="card linkbox border-<%= border_color %>" style="margin: 25px ;padding: 15px">
-  <a href="/tasks/<%= task.id %>"></a>
   <div class="row">
-    <div class="col-8">
+    <div class="col-9">
       <%= task.start_at.strftime("%H:%M") %>~<%= task.end_at.strftime("%H:%M") %>
       <br>
       <%= task.title %>
     </div>
-    <div class="col-2">
+    <a href="/tasks/<%= task.id %>"></a>
+    <div class="col-1">
       <% if task.status != 'custom' %>
         <% if task.status == 'done' %>
           <%= form_with(model: task, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "not_done" %>
             <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
             <!--エラー防止-->
-            <%= f.submit '達成済', class: 'btn btn-success btn-sm'%>
+            <%= f.submit '達成済', class: 'btn btn-group btn-success btn-sm'%>
           <% end %>
         <% else %>
           <%= form_with(model: task, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "done" %>
             <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
             <!--エラー防止-->
-            <%= f.submit '未達成', class: 'btn btn-danger btn-sm'%>
+            <%= f.submit '未達成', class: 'btn btn-group btn-danger btn-sm'%>
           <% end %>
         <% end %>
       <% end %>
@@ -45,13 +44,9 @@
 
 <div class="card linkbox border-<%= border_color %>" style="margin: 25px ;padding: 15px">
   <a href="/tasks/<%= task.id %>"></a>
-  <div class="row">
-    <div class="col-10">
       <%= task.start_at.strftime("%H:%M") %>~<%= task.end_at.strftime("%H:%M") %>
       <br>
       <%= task.title %>
-    </div>
-  </div>
 </div>
 
 

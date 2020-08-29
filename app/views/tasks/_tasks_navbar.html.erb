@@ -1,27 +1,48 @@
 <!--ナビバー-->
 <ul class="nav nav-tabs nav-justified mb-3">
 <!--All……下記のナビバーをクリックすることにより、全てのタスクを表示する-->
-  <li class="nav-item"><a href="#all_tasks" class="nav-link active" data-toggle="tab">All of Tasks</a></li>
-  <li class="nav-item"><a href="#expired_tasks" class="nav-link" data-toggle="tab">Expired Tasks</a></li>
+  <li class="nav-item"><a href="#all" class="nav-link" data-toggle="tab">All</a></li>
+  <li class="nav-item"><a href="#todo" class="nav-link active" data-toggle="tab">ToDo</a></li>
+  <li class="nav-item"><a href="#expired" class="nav-link" data-toggle="tab">Expired</a></li>
   <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-  <!--今日-->
-  <li class="nav-item"><a href="#today" class="nav-link" data-toggle="tab">Today Tasks</a></li>
-  <!--明日-->
-  <li class="nav-item"><a href="#tomorrow" class="nav-link" data-toggle="tab">Tomorrow Tasks</a></li>
+  <!--日常的なタスク-->
+  <li class="nav-item"><a href="#daily" class="nav-link" data-toggle="tab">Daily</a></li>
 </ul>
+
 
 <!--内容-->
 <div class="tab-content">
-  <div id="all_tasks" class="tab-pane active">
+  
+  <div id="all" class="tab-pane">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>全てのタスク</font><br>
+      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired』に移る</font>
+    </div>
     <%= render 'tasks/tasks', tasks: @tasks %>
   </div>
-  <div id="expired_tasks" class="tab-pane">
+  
+  <div id="todo" class="tab-pane active">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>これから達成すべき全てのタスク</font><br>
+      <font size='2' color='#999999'>タスクは終了日の翌日の0:00以降に『Expired』に移る</font><br>
+      <font size='2' color='#999999'>終了時刻が過ぎても諦めず、タスク達成に努めましょう</font>
+    </div>
+    <%= render 'tasks/todo_tasks', tasks: @tasks %>
+  </div>
+  
+  <div id="expired" class="tab-pane">
+    <div class ="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>期限の過ぎた全てのタスク</font><br>
+      <font size='2' color='#999999'>それぞれのタスクを次の予定に再編集、もしくは消去しましょう</font>
+    </div>
     <%= render 'tasks/tasks', tasks: @expired_tasks %>
   </div>
-  <div id="today" class="tab-pane">
-    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @now }%>
+  
+  <div id="daily" class="tab-pane">
+    <div class="text-center" style="margin:25px 10px 25px 10px">
+      <font size='2' color='#999999'>習慣を含めた今日分のタスクスケジュール</font><br>
+    </div>
+    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @now, date: @date} %>
   </div>
-  <div id="tomorrow" class="tab-pane">
-    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @tomorrow }%>
-  </div>
+  
 </div>
