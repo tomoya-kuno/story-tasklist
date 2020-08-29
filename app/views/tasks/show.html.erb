@@ -11,7 +11,7 @@
             <br><%= @task.content %>
           </div>
         <% end %>
-        <font size='2' color='#999999'>内容＆関連情報</font><br>
+        <font size='2' color='#999999'>タスク実行時間</font><br>
         <% if @task.status == 'custom' %>
           (<%= @task.week_day_index %>)曜日
           <%= @task.start_at.strftime("開始:%H時%M分") %>
@@ -20,7 +20,7 @@
         <% else %>
           <%= @task.start_on.strftime("開始:%Y年%m月%d日") %><%= @task.start_at.strftime("%H時%M分") %>
           <br>
-          <%= @task.end_on.strftime("終了:%Y年%m月%d日") %><%= @task.end_at.strftime("%H時%M分") %>
+          <%= @task.start_on.strftime("終了:%Y年%m月%d日") %><%= @task.end_at.strftime("%H時%M分") %>
         <% end %>
         <div style="padding: 5px 0px 5px 0px">
           <div class="text-right">
