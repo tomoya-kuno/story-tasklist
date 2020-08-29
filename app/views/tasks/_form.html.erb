@@ -31,7 +31,7 @@
       <%= f.label :end_at, '終了時刻' %>
       <%= f.time_select :end_at ,class: 'form-control' %>
     </div>
-    <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
+    <%= f.hidden_field :week_day_index, multiple: true ,:value => 'a'%>
     <!--エラー防止-->
     <%= f.submit 'Add', class: 'btn btn-primary btn-block'%>
 <% end %>

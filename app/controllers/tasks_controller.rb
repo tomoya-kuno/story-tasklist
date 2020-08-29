@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   before_action :set_task, only:[:show,:edit,:update,:destroy]
   before_action :set_tasklist, only:[:index,:show,:calendar,:custom,:new,:create,:edit,:update]
   before_action :set_now_datetime, only:[:index,:show,:new,:create,:edit,:update]
-  before_action :week_day_index_string, only:[:create,:update]
   
   def index
   end
@@ -116,16 +115,5 @@ class TasksController < ApplicationController
       redirect_to root_url
     end
   end
-  
-  def week_day_index_string
-    if params[:task][:week_day_index] != nil
-      params[:task][:week_day_index] = params[:task][:week_day_index].join("/")
-      # week_day_indexに入れる曜日指定をstring型に変換する
-    else
-      flash.now[:danger] = 'Task が設定されませんでした'
-      redirect_to '/tasks/custom_alert'
-    end
-  end
-  
   
 end

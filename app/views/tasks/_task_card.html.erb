@@ -22,14 +22,14 @@
         <% if task.status == 'done' %>
           <%= form_with(model: task, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "not_done" %>
-            <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
+            <%= f.hidden_field :week_day_index,multiple: true,:value => 'a' %>
             <!--エラー防止-->
             <%= f.submit '達成済', class: 'btn btn-group btn-success btn-sm'%>
           <% end %>
         <% else %>
           <%= form_with(model: task, local: true) do |f| %>
             <%= f.hidden_field :status, :value => "done" %>
-            <%= f.hidden_field :week_day_index,multiple: true,:value => '通常タスク' %>
+            <%= f.hidden_field :week_day_index,multiple: true,:value => 'a' %>
             <!--エラー防止-->
             <%= f.submit '未達成', class: 'btn btn-group btn-danger btn-sm'%>
           <% end %>
@@ -50,5 +50,4 @@
 </div>
 
 
-  
 <% end %>

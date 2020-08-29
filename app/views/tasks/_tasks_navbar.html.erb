@@ -5,8 +5,6 @@
   <li class="nav-item"><a href="#todo" class="nav-link active" data-toggle="tab">ToDo</a></li>
   <li class="nav-item"><a href="#expired" class="nav-link" data-toggle="tab">Expired</a></li>
   <!--○/○(○)……下記のナビばーをクリックすることにより、指定の日時のタスクを全て表示する-->
-  <!--日常的なタスク-->
-  <li class="nav-item"><a href="#daily" class="nav-link" data-toggle="tab">Daily</a></li>
 </ul>
 
 
@@ -36,13 +34,6 @@
       <font size='2' color='#999999'>それぞれのタスクを次の予定に再編集、もしくは消去しましょう</font>
     </div>
     <%= render 'tasks/tasks', tasks: @expired_tasks %>
-  </div>
-  
-  <div id="daily" class="tab-pane">
-    <div class="text-center" style="margin:25px 10px 25px 10px">
-      <font size='2' color='#999999'>習慣を含めた今日分のタスクスケジュール</font><br>
-    </div>
-    <%= render 'tasks/resignated_date', { first_tasks: @tasks_with_customs_first ,second_tasks: @tasks_with_customs_second , resignated_date: @now, date: @date} %>
   </div>
   
 </div>
